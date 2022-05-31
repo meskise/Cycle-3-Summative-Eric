@@ -9,8 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class ProtectiveOrb extends Actor
 {
     int counter = 0;
-    int deltaX;
-    int deltaY;
+    double deltaX;
+    double deltaY;
     boolean isFacingRight;
     
     public ProtectiveOrb()
@@ -27,7 +27,7 @@ public class ProtectiveOrb extends Actor
     public void act() 
     {   
        //System.out.println(counter);
-       movementKeys();
+       //movementKeys();
        
        if (Greenfoot.isKeyDown("c"))
        {
@@ -45,19 +45,19 @@ public class ProtectiveOrb extends Actor
     
     public void movementKeys()
     {
-        double deltaX = 0;
-        double deltaY = 0;
-        // Movement Keys
         if (Greenfoot.isKeyDown("a"))
         {
             deltaX = - 3.5;
         }
-        
-        if (Greenfoot.isKeyDown("d"))
+        else if (Greenfoot.isKeyDown("d"))
         {
             deltaX = + 3.5;
         }
-        
+        else
+        {
+            deltaX = 0;
+        }
+
         // Allows movement
         setLocation(getX() + (int)deltaX, getY() + (int)deltaY);
         
