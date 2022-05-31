@@ -27,7 +27,7 @@ public class MyWorld extends World
     public void spawnObjects()
     {
         Woodcutter woodcutter = new Woodcutter();
-        addObject (woodcutter, 250, 250);
+        addObject (woodcutter, 250, 330);
         
         Ground ground = new Ground();
         addObject (ground, 100, 390);
