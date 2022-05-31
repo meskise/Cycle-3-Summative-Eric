@@ -7,15 +7,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class Woodcutter extends Actor
-{
-    ProtectiveOrb pO = new ProtectiveOrb();
-    ProtectiveOrb pO2 = new ProtectiveOrb();
-    ProtectiveOrb pO3 = new ProtectiveOrb();
-    ProtectiveOrb pO4 = new ProtectiveOrb();
-    ProtectiveOrb pO5 = new ProtectiveOrb();
-    ProtectiveOrb pO6 = new ProtectiveOrb();
-    ProtectiveOrb pO7 = new ProtectiveOrb();
-    ProtectiveOrb pO8 = new ProtectiveOrb();
+{   
+    int orbDistance = 50;
+    int orbDiagDistance = 30;
     
     double deltaX = 0;
     double deltaY = 0;
@@ -38,7 +32,7 @@ public class Woodcutter extends Actor
         orbs[0] = new ProtectiveOrb();
         for (int i = 0; i < orbs.length; i++)
         {
-            orbs[0 + 1] = new ProtectiveOrb();
+            orbs[i] = new ProtectiveOrb();
         }
     }
     
@@ -52,7 +46,7 @@ public class Woodcutter extends Actor
         movementKeys();
         collisonCheck();
         applyGravity();
-        
+        orbsSetLocation();
         
         if (cooldown > 0) cooldown--; // Run cooldown.
         if(Greenfoot.isKeyDown("c") && (cooldown == 0))
@@ -61,22 +55,29 @@ public class Woodcutter extends Actor
             protectiveCircle();
             cooldown = 350;
         }
-        pO.setLocation(getX() + (int)deltaX, getY() + (int)deltaY - 50);
-        pO2.setLocation(getX() + (int)deltaX - 50, getY() + (int)deltaY);
-        pO3.setLocation(getX() + (int)deltaX + 50, getY() + (int)deltaY);
-        pO4.setLocation(getX() + (int)deltaX, getY() + (int)deltaY + 50);
-        pO5.setLocation(getX() + (int)deltaX - 30, getY() + (int)deltaY - 30);
-        pO6.setLocation(getX() + (int)deltaX + 30, getY() + (int)deltaY - 30);
-        pO7.setLocation(getX() + (int)deltaX + 30, getY() + (int)deltaY + 30);
-        pO8.setLocation(getX() + (int)deltaX - 30, getY() + (int)deltaY + 30);
         
-    } 
-   
+    }
     
+    /**
+     * Sets the location for all protective orbs, allowing them to follow player.
+     */
+    public void orbsSetLocation()
+    {
+        orbs[0].setLocation(getX() + (int)deltaX, getY() + (int)deltaY - orbDistance);
+        orbs[1].setLocation(getX() + (int)deltaX - orbDistance, getY() + (int)deltaY);
+        orbs[2].setLocation(getX() + (int)deltaX + orbDistance, getY() + (int)deltaY);
+        orbs[3].setLocation(getX() + (int)deltaX, getY() + (int)deltaY + orbDistance);
+        orbs[4].setLocation(getX() + (int)deltaX - orbDiagDistance, getY() + (int)deltaY - orbDiagDistance);
+        orbs[5].setLocation(getX() + (int)deltaX + orbDiagDistance, getY() + (int)deltaY - orbDiagDistance);
+        orbs[6].setLocation(getX() + (int)deltaX + orbDiagDistance, getY() + (int)deltaY + orbDiagDistance);
+        orbs[7].setLocation(getX() + (int)deltaX - orbDiagDistance, getY() + (int)deltaY + orbDiagDistance);
+    }
+   
+    /**
+     * Basic movement keys.
+     */
     public void movementKeys()
     {
-        //double deltaX = 0;
-        //double deltaY = 0;
         // Movement Keys
         if (Greenfoot.isKeyDown("a"))
         {
@@ -90,7 +91,6 @@ public class Woodcutter extends Actor
         {
             deltaX = 0;
         }
-        
         
         if (Greenfoot.isKeyDown("space"))
         {
@@ -123,6 +123,9 @@ public class Woodcutter extends Actor
         }
     }
     
+    /**
+     * Void for most isTouching commands.
+     */
     public void isTouching()
     {
         // Check if falling.
@@ -133,32 +136,30 @@ public class Woodcutter extends Actor
         }
     }
     
+    /**
+     * Spawns protective orbs when called.
+     */
     public void protectiveCircle()
     {
+        // find woodcutter.
         int aX = getX();
         int aY = getY();
-        getWorld().addObject(pO, aX, aY);
-        getWorld().addObject(pO2, aX, aY);
-        getWorld().addObject(pO3, aX, aY);
-        getWorld().addObject(pO4, aX, aY);
-        getWorld().addObject(pO5, aX, aY);
-        getWorld().addObject(pO6, aX, aY);
-        getWorld().addObject(pO7, aX, aY);
-        getWorld().addObject(pO8, aX, aY);
         
-        //System.out.println("You Pressed C " + cooldown);
-        // for(double i = 0; i < 9; i++)
-        // {
-            // getWorld().addObject(pO, aX, aY - 50);
-            
-            // getWorld().addObject(pO2, aX + 50, aY);
-            
-            // getWorld().addObject(pO3, aX - 50 , aY);
-            
-            // getWorld().addObject(pO4, aX, aY + 50);
-        // }
+        // Adds protective orbs.
+        getWorld().addObject(orbs[0], aX, aY);
+        getWorld().addObject(orbs[1], aX, aY);
+        getWorld().addObject(orbs[2], aX, aY);
+        getWorld().addObject(orbs[3], aX, aY);
+        getWorld().addObject(orbs[4], aX, aY);
+        getWorld().addObject(orbs[5], aX, aY);
+        getWorld().addObject(orbs[6], aX, aY);
+        getWorld().addObject(orbs[7], aX, aY);
+        
     }
     
+    /**
+     * Void for applying gravity to player.
+     */
     public void applyGravity()
     {
         // Height of the character, which is just height of the current image.
@@ -196,7 +197,7 @@ public class Woodcutter extends Actor
             
             moveOnTopOfObject(ground); // Adjust position to just touching platform.
         }
-        else
+        else // If no ground below.
         {
             isInAir = true;
         }
@@ -207,6 +208,9 @@ public class Woodcutter extends Actor
         }
     }
     
+    /**
+     * Checks for any collisons to help with phasing through objects.
+     */
     public void collisonCheck()
     {
         int height = getImage().getHeight();
@@ -235,6 +239,9 @@ public class Woodcutter extends Actor
         }
     }
     
+    /**
+     * Moves actor on top of object when called.
+     */
     public void moveOnTopOfObject(Actor object)
     {
         // Allows player to be adjusted to top of the platforms to prevent bugs.
@@ -244,6 +251,9 @@ public class Woodcutter extends Actor
         setLocation(getX(), object.getY() - objectHeight / 2 - height / 2 + 1);
     }
     
+    /**
+     * Moves actor down from object when called.
+     */
     public void moveOnBottomOfObject(Actor object)
     {
         // Allows player to be adjusted to top of the platforms to prevent bugs.
@@ -253,6 +263,9 @@ public class Woodcutter extends Actor
         setLocation(getX(), object.getY() + objectHeight / 2 + height / 2 + 1);
     }
     
+    /**
+     * If actor hits the right of a platform, stop.
+     */
     public void stopOnRightObject(Actor object)
     {
         int width = getImage().getWidth();
@@ -261,6 +274,9 @@ public class Woodcutter extends Actor
         setLocation(object.getX() + objectWidth /2 + width /2, getY());
     }
     
+    /**
+     * If actor hits left of a platform, stop.
+     */
     public void stopOnLeftObject(Actor object)
     {
         int width = getImage().getWidth();
