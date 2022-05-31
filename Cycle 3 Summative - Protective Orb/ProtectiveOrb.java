@@ -27,13 +27,12 @@ public class ProtectiveOrb extends Actor
     public void act() 
     {   
        //System.out.println(counter);
-       //movementKeys();
-       
-       if (Greenfoot.isKeyDown("c"))
+       // If Shift and C are pressed, remove all protective orbs.
+       if (Greenfoot.isKeyDown("shift") && Greenfoot.isKeyDown("c"))
        {
-           
+           getWorld().removeObject(this);
        }
-    
+       // If the counter is 300 or over 300, remove all protective orbs and reset counter.
        if (counter >= 300)
        {
            getWorld().removeObject(this);
@@ -43,34 +42,4 @@ public class ProtectiveOrb extends Actor
        counter++;
     }
     
-    public void movementKeys()
-    {
-        if (Greenfoot.isKeyDown("a"))
-        {
-            deltaX = - 3.5;
-        }
-        else if (Greenfoot.isKeyDown("d"))
-        {
-            deltaX = + 3.5;
-        }
-        else
-        {
-            deltaX = 0;
-        }
-
-        // Allows movement
-        setLocation(getX() + (int)deltaX, getY() + (int)deltaY);
-        
-        // If deltaX is greater than 0 then facing right is true.
-        if (deltaX > 0)
-        {
-            isFacingRight = true;
-        }
-        // If deltaX is less than 0 then facing right is false.
-        else if (deltaX < 0)
-        {
-            isFacingRight = false;
-        }
-    
-    }
 }
