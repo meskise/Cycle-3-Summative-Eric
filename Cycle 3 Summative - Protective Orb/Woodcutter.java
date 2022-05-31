@@ -8,6 +8,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Woodcutter extends Actor
 {
+    ProtectiveOrb pO = new ProtectiveOrb();
+    ProtectiveOrb pO2 = new ProtectiveOrb();
+    ProtectiveOrb pO3 = new ProtectiveOrb();
+    ProtectiveOrb pO4 = new ProtectiveOrb();
+    ProtectiveOrb pO5 = new ProtectiveOrb();
+    ProtectiveOrb pO6 = new ProtectiveOrb();
+    ProtectiveOrb pO7 = new ProtectiveOrb();
+    ProtectiveOrb pO8 = new ProtectiveOrb();
+    
     double deltaX = 0;
     double deltaY = 0;
     
@@ -18,11 +27,19 @@ public class Woodcutter extends Actor
     
     int cooldown = 0;
     
+    ProtectiveOrb[] orbs = new ProtectiveOrb[8];
+    
     public Woodcutter()
     {
         GreenfootImage image = getImage();
         image.scale(40, 45);
         setImage(image);
+        
+        orbs[0] = new ProtectiveOrb();
+        for (int i = 0; i < orbs.length; i++)
+        {
+            orbs[0 + 1] = new ProtectiveOrb();
+        }
     }
     
     /**
@@ -42,8 +59,17 @@ public class Woodcutter extends Actor
         {
             // If "C" is pressed then spawn protective circle.
             protectiveCircle();
-            cooldown = 50;
+            cooldown = 350;
         }
+        pO.setLocation(getX() + (int)deltaX, getY() + (int)deltaY - 50);
+        pO2.setLocation(getX() + (int)deltaX - 50, getY() + (int)deltaY);
+        pO3.setLocation(getX() + (int)deltaX + 50, getY() + (int)deltaY);
+        pO4.setLocation(getX() + (int)deltaX, getY() + (int)deltaY + 50);
+        pO5.setLocation(getX() + (int)deltaX - 30, getY() + (int)deltaY - 30);
+        pO6.setLocation(getX() + (int)deltaX + 30, getY() + (int)deltaY - 30);
+        pO7.setLocation(getX() + (int)deltaX + 30, getY() + (int)deltaY + 30);
+        pO8.setLocation(getX() + (int)deltaX - 30, getY() + (int)deltaY + 30);
+        
     } 
    
     
@@ -111,17 +137,26 @@ public class Woodcutter extends Actor
     {
         int aX = getX();
         int aY = getY();
+        getWorld().addObject(pO, aX, aY);
+        getWorld().addObject(pO2, aX, aY);
+        getWorld().addObject(pO3, aX, aY);
+        getWorld().addObject(pO4, aX, aY);
+        getWorld().addObject(pO5, aX, aY);
+        getWorld().addObject(pO6, aX, aY);
+        getWorld().addObject(pO7, aX, aY);
+        getWorld().addObject(pO8, aX, aY);
+        
         //System.out.println("You Pressed C " + cooldown);
-        for(double i = 0; i < 9; i++)
-        {
-            getWorld().addObject(new ProtectiveOrb(), aX, aY - 50);
+        // for(double i = 0; i < 9; i++)
+        // {
+            // getWorld().addObject(pO, aX, aY - 50);
             
-            getWorld().addObject(new ProtectiveOrb(), aX + 50, aY);
+            // getWorld().addObject(pO2, aX + 50, aY);
             
-            getWorld().addObject(new ProtectiveOrb(), aX - 50 , aY);
+            // getWorld().addObject(pO3, aX - 50 , aY);
             
-            getWorld().addObject(new ProtectiveOrb(), aX, aY + 30);
-        }
+            // getWorld().addObject(pO4, aX, aY + 50);
+        // }
     }
     
     public void applyGravity()
