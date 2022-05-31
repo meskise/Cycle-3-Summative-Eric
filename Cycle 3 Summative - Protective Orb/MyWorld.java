@@ -28,6 +28,11 @@ public class MyWorld extends World
     {
         Woodcutter woodcutter = new Woodcutter();
         addObject (woodcutter, 250, 250);
+        
+        Ground ground = new Ground();
+        addObject (ground, 100, 390);
+        Ground ground2 = new Ground();
+        addObject (ground2, 500, 387);
     }
     
     
