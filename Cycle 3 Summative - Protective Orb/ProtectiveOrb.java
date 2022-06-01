@@ -9,6 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class ProtectiveOrb extends Actor
 {
     int counter = 0;
+    int frameCounter = 0;
+    int cooldown = 0;
+    
     double deltaX;
     double deltaY;
     boolean isFacingRight;
@@ -32,13 +35,18 @@ public class ProtectiveOrb extends Actor
        {
            getWorld().removeObject(this);
        }
-       // If the counter is 300 or over 300, remove all protective orbs and reset counter.
-       if (counter >= 300)
-       {
-           getWorld().removeObject(this);
-           counter = 0;
-       }
        
+       if (isTouching(Enemy.class))
+       {
+            frameCounter++;
+            
+            if (frameCounter == 3)
+            {
+                // Remove axe after hitting enemy.
+                getWorld().removeObject(this);
+            }
+       }
+        
        counter++;
     }
     
