@@ -10,6 +10,9 @@ public class ProtectiveOrb extends Actor
 {
     int counter = 0;
     int frameCounter = 0;
+
+    int cooldown = 0;
+
     
     double deltaX;
     double deltaY;
@@ -35,8 +38,10 @@ public class ProtectiveOrb extends Actor
            getWorld().removeObject(this);
        }
 
+       
        if (isTouching(Enemy.class))
-        {
+       {
+
             frameCounter++;
             
             if (frameCounter == 3)
@@ -44,9 +49,8 @@ public class ProtectiveOrb extends Actor
                 // Remove axe after hitting enemy.
                 getWorld().removeObject(this);
             }
-        }
        
-       counter++;
-    }
+            counter++;
+      }
     
 }

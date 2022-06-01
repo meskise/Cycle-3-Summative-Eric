@@ -116,5 +116,3 @@ public class Enemy extends Actor
          // Increment frame counter.
          enemyFrameCounter++;
     }
-    
-}

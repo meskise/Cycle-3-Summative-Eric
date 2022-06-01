@@ -31,12 +31,13 @@ public class Woodcutter extends Actor
         setImage(image);
         
         orbs[0] = new ProtectiveOrb();
-        // Loads all protective orbs.
+        // Loads all of 8 protective orbs
+
         for (int i = 0; i < orbs.length; i++)
         {
             orbs[i] = new ProtectiveOrb();
         }
-        
+
     }
     
     /**
@@ -50,7 +51,15 @@ public class Woodcutter extends Actor
         collisonCheck();
         applyGravity();
         orbsSetLocation();
+        cooldown();
         
+    }
+    
+    /**
+     * Only allows orbs to be used every few seconds.
+     */
+    public void cooldown()
+    {
         if (cooldown > 0) cooldown--; // Run cooldown.
         if(Greenfoot.isKeyDown("c") && (cooldown == 0))
         {
@@ -58,7 +67,6 @@ public class Woodcutter extends Actor
             protectiveCircle();
             cooldown = 350;
         }
-        
     }
     
     
