@@ -28,6 +28,8 @@ public class MyWorld extends World
     {
         Woodcutter woodcutter = new Woodcutter();
         addObject (woodcutter, 250, 330);
+        Enemy enemy = new Enemy();
+        addObject (enemy, 590, 325);
         
         Ground ground = new Ground();
         addObject (ground, 100, 390);
