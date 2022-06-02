@@ -25,18 +25,19 @@ public class Woodcutter extends Actor
     
     public Woodcutter()
     {
+        
         GreenfootImage image = getImage();
         image.scale(40, 45);
         setImage(image);
         
         orbs[0] = new ProtectiveOrb();
         // Loads all of 8 protective orbs
+
         for (int i = 0; i < orbs.length; i++)
         {
             orbs[i] = new ProtectiveOrb();
         }
-        // 
-        
+
     }
     
     /**
@@ -66,6 +67,7 @@ public class Woodcutter extends Actor
             cooldown = 350;
         }
     }
+    
     
     /**
      * Sets the location for all protective orbs, allowing them to follow player.
@@ -153,8 +155,9 @@ public class Woodcutter extends Actor
         // find woodcutter.
         int aX = getX();
         int aY = getY();
-        
-         // Moves the orbs to their locations
+
+        // Moves the orbs to their locations
+
         for (int i = 0; i < orbs.length; i++)
         {
             getWorld().addObject(orbs[i], aX, aY);
