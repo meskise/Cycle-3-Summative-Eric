@@ -52,7 +52,6 @@ public class Woodcutter extends Actor
         applyGravity();
         orbsSetLocation();
         cooldown();
-        
     }
     
     /**
@@ -156,8 +155,9 @@ public class Woodcutter extends Actor
         // find woodcutter.
         int aX = getX();
         int aY = getY();
-        
+
         // Moves the orbs to their locations
+
         for (int i = 0; i < orbs.length; i++)
         {
             getWorld().addObject(orbs[i], aX, aY);
