@@ -23,6 +23,8 @@ public class Enemy extends Actor
     
     int animationInterval = 5;
     
+
+    
     GreenfootImage imageWalkLeft1;
     GreenfootImage imageWalkLeft2;
     GreenfootImage imageWalkLeft3;
@@ -131,7 +133,8 @@ public class Enemy extends Actor
         walkLeft();
         walkRight();
         enemyFrameCounter++;
-        System.out.println(enemyFrameCounter);
+        //System.out.println(enemyFrameCounter);
+        // If enemy frame counter is 40, reset to 0.
         if (enemyFrameCounter == 40)
         {
             enemyFrameCounter = 0;
@@ -144,13 +147,21 @@ public class Enemy extends Actor
         if (shotTimer.millisElapsed() > minShotWait + randomShot)
         {
             shotTimer.mark();
-            randomShot = Greenfoot.getRandomNumber(3000);
-            getWorld().addObject(new Sword(), getX(), getY());
+            randomShot = Greenfoot.getRandomNumber(6000);
+            spawnSword();
         }
+    }
+    
+    public void spawnSword()
+    {
+        Sword sword = new Sword();
+        
+        getWorld().addObject(sword, getX(), getY());
     }
     
     public void health()
     {
+        // if touches protective orb lose 25 health.
         if (isTouching(ProtectiveOrb.class))
         {
             health = health - 25;
@@ -163,7 +174,7 @@ public class Enemy extends Actor
     
     public void isTouching()
     {
-        
+        //System.out.println(deltaX);
         if (isAtEdge())
         {
             movement();
@@ -178,49 +189,7 @@ public class Enemy extends Actor
     
     public void Die()
     {
-         deltaX = 0.5;
-         if (enemyFrameCounter == 8 * animationInterval)
-         {
-             //Reset to 0.
-             //enemyFrameCounter = 0;
-             getWorld().removeObject(this);
-         }
-                
-         if (enemyFrameCounter == 0)
-         {
-             setImage(imageDying1);
-         }
-         else if (enemyFrameCounter == 1 * animationInterval)
-         {
-             setImage(imageDying1);
-         }
-         else if (enemyFrameCounter == 2 * animationInterval)
-         {
-             setImage(imageDying2);
-         }
-         else if (enemyFrameCounter == 3 * animationInterval)
-         {
-             setImage(imageDying2);
-         }
-         else if (enemyFrameCounter == 4 * animationInterval)
-         {
-             setImage(imageDying3);
-         }
-         else if (enemyFrameCounter == 5 * animationInterval)
-         {
-             setImage(imageDying3);
-         }
-         else if (enemyFrameCounter == 6 * animationInterval)
-         {
-             setImage(imageDying3);
-         }
-         else if (enemyFrameCounter == 7 * animationInterval)
-         {
-             setImage(imageDying3);
-         }
-                
-         // Increment frame counter.
-         //enemyFrameCounter++;
+         getWorld().removeObject(this);
     }
     
     public void walkLeft()

@@ -51,7 +51,6 @@ public class Woodcutter extends Actor
         applyGravity();
         orbsSetLocation();
         cooldown();
-        
     }
     
     /**
