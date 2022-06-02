@@ -50,5 +50,9 @@ public class Sword extends Actor
             getWorld().removeObject(this);
         }
     
+        if (isTouching(ProtectiveOrb.class))
+        {
+            getWorld().removeObject(this);
+        }
     }
 }

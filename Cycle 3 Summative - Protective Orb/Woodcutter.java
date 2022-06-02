@@ -36,10 +36,7 @@ public class Woodcutter extends Actor
             orbs[i] = new ProtectiveOrb();
         }
         // 
-        for (int i = 0; i < 9; i++)
-        {
-            
-        }
+        
     }
     
     /**
@@ -158,15 +155,13 @@ public class Woodcutter extends Actor
         int aX = getX();
         int aY = getY();
         
-        // Adds protective orbs.
-        getWorld().addObject(orbs[0], aX, aY);
-        getWorld().addObject(orbs[1], aX, aY);
-        getWorld().addObject(orbs[2], aX, aY);
-        getWorld().addObject(orbs[3], aX, aY);
-        getWorld().addObject(orbs[4], aX, aY);
-        getWorld().addObject(orbs[5], aX, aY);
-        getWorld().addObject(orbs[6], aX, aY);
-        getWorld().addObject(orbs[7], aX, aY);
+         // Moves the orbs to their locations
+        for (int i = 0; i < orbs.length; i++)
+        {
+            getWorld().addObject(orbs[i], aX, aY);
+            orbs[i].move(50);
+            orbs[i].setRotation(i*45);
+        }
         
     }
     

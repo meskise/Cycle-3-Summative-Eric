@@ -130,13 +130,12 @@ public class Enemy extends Actor
         swordThrow();
         walkLeft();
         walkRight();
-        
         enemyFrameCounter++;
-        if (enemyFrameCounter >= 8 * animationInterval)
-         {
-             // Reset to 0.
-             enemyFrameCounter = 0;
-         }
+        System.out.println(enemyFrameCounter);
+        if (enemyFrameCounter == 40)
+        {
+            enemyFrameCounter = 0;
+        }
     }
     
     public void swordThrow()
@@ -146,7 +145,7 @@ public class Enemy extends Actor
         {
             shotTimer.mark();
             randomShot = Greenfoot.getRandomNumber(3000);
-            enemyAttack();
+            getWorld().addObject(new Sword(), getX(), getY());
         }
     }
     
@@ -180,9 +179,9 @@ public class Enemy extends Actor
     public void Die()
     {
          deltaX = 0.5;
-         if (enemyFrameCounter >= 8 * animationInterval)
+         if (enemyFrameCounter == 8 * animationInterval)
          {
-             // Reset to 0.
+             //Reset to 0.
              //enemyFrameCounter = 0;
              getWorld().removeObject(this);
          }
@@ -220,54 +219,6 @@ public class Enemy extends Actor
              setImage(imageDying3);
          }
                 
-         // Increment frame counter.
-         //enemyFrameCounter++;
-    }
-    
-    public void enemyAttack()
-    {
-        deltaX = 0.5;
-        // System.out.println(enemyFrameCounter);
-        if (enemyFrameCounter >= 8 * animationInterval)
-         {
-             // Reset to 0.
-             //enemyFrameCounter = 0;
-         }
-                
-         if (enemyFrameCounter == 0)
-         {
-             setImage(imageAttack1);
-         }
-         else if (enemyFrameCounter == 1 * animationInterval)
-         {
-             setImage(imageAttack1);
-         }
-         else if (enemyFrameCounter == 2 * animationInterval)
-         {
-             setImage(imageAttack2);
-         }
-         else if (enemyFrameCounter == 3 * animationInterval)
-         {
-             setImage(imageAttack2);
-         }
-         else if (enemyFrameCounter == 4 * animationInterval)
-         {
-             setImage(imageAttack3);
-         }
-         else if (enemyFrameCounter == 5 * animationInterval)
-         {
-             setImage(imageAttack3);
-         }
-         else if (enemyFrameCounter == 6 * animationInterval)
-         {
-             setImage(imageAttack3);
-         }
-         else if (enemyFrameCounter == 7 * animationInterval)
-         {
-             setImage(imageAttack4);
-             getWorld().addObject(new Sword(), getX(), getY());
-         }
-   
          // Increment frame counter.
          //enemyFrameCounter++;
     }
