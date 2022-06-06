@@ -17,6 +17,8 @@ public class MyWorld extends World
     {    
         super(600, 400, 1); 
         spawnObjects();
+        // Makes objects appear to be infront of one another.
+        setPaintOrder(Woodcutter.class, Enemy.class, ProtectiveOrb.class, Ground.class, Platform.class, Cactus.class);
     }
     
     public void act()
@@ -27,7 +29,7 @@ public class MyWorld extends World
     public void spawnObjects()
     {
         Woodcutter woodcutter = new Woodcutter();
-        addObject (woodcutter, 250, 330);
+        addObject (woodcutter, 50, 330);
         Enemy enemy = new Enemy();
         addObject (enemy, 590, 325);
         
@@ -35,6 +37,17 @@ public class MyWorld extends World
         addObject (ground, 100, 390);
         Ground ground2 = new Ground();
         addObject (ground2, 500, 387);
+        Platform platform = new Platform();
+        addObject (platform, 225, 275);
+        Platform2 platform2 = new Platform2();
+        addObject (platform2, 375, 215);
+        Platform platform3 = new Platform();
+        addObject (platform3, 200, 160);
+        
+        Cactus cactus = new Cactus();
+        addObject (cactus, 330, 330);
+        Cactus2 cactus2 = new Cactus2();
+        addObject (cactus2, 450, 300);
     }
     
     

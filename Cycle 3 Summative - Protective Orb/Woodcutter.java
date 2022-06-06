@@ -68,8 +68,8 @@ public class Woodcutter extends Actor
         {
             // If "C" is pressed and cooldown is over then spawn protective circle.
             protectiveCircle();
-            // Set cooldown to 450 frames,
-            cooldown = 450;
+            // Set cooldown to 350 frames,
+            cooldown = 350;
         }
     }
     
@@ -150,6 +150,11 @@ public class Woodcutter extends Actor
         {
             // Standing on ground, don't apply gravity.
             deltaY = 0;
+        }
+        if (isTouching(Cactus.class))
+        {
+            // If touches cactus, game over.
+            Greenfoot.setWorld(new GameOver());
         }
     }
     
