@@ -44,10 +44,11 @@ public class ProtectiveOrb extends Actor
             }
        }
        
-       // Protective orbs last 100 frames.
-       if (cooldown == 100)
+       // Protective orbs last 150 frames.
+       if (cooldown == 150)
        {
            getWorld().removeObject(this);
+           cooldown = 0;
        }
     
        // If Shift and C are pressed, remove all protective orbs.
