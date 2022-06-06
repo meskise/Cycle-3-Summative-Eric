@@ -21,11 +21,12 @@ public class Woodcutter extends Actor
     
     int cooldown = 0;
     
+    // Loads 8 new protective orbs in an array.
     ProtectiveOrb[] orbs = new ProtectiveOrb[8];
     
     public Woodcutter()
     {
-        
+        // Loads and scales images.
         GreenfootImage image = getImage();
         image.scale(40, 45);
         setImage(image);
@@ -59,12 +60,16 @@ public class Woodcutter extends Actor
      */
     public void cooldown()
     {
-        if (cooldown > 0) cooldown--; // Run cooldown.
+        if (cooldown > 0) 
+        {
+            cooldown--; // Run cooldown if cooldown is greater than 0.
+        }
         if(Greenfoot.isKeyDown("c") && (cooldown == 0))
         {
-            // If "C" is pressed then spawn protective circle.
+            // If "C" is pressed and cooldown is over then spawn protective circle.
             protectiveCircle();
-            cooldown = 350;
+            // Set cooldown to 450 frames,
+            cooldown = 450;
         }
     }
     
@@ -74,6 +79,7 @@ public class Woodcutter extends Actor
      */
     public void orbsSetLocation()
     {
+        // Set location of all 8 orbs.
         orbs[0].setLocation(getX() + (int)deltaX, getY() + (int)deltaY - orbDistance);
         orbs[1].setLocation(getX() + (int)deltaX - orbDistance, getY() + (int)deltaY);
         orbs[2].setLocation(getX() + (int)deltaX + orbDistance, getY() + (int)deltaY);
@@ -244,7 +250,7 @@ public class Woodcutter extends Actor
         
         if (getY() >= 395)
         {
-            //Greenfoot.setWorld(new GameOver());
+            Greenfoot.setWorld(new GameOver());
             Greenfoot.stop();
         }
     }
