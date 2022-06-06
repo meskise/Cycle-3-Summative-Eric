@@ -21,6 +21,8 @@ public class Woodcutter extends Actor
     
     int cooldown = 0;
     
+    private boolean touchedKey = false;
+    
     // Loads 8 new protective orbs in an array.
     ProtectiveOrb[] orbs = new ProtectiveOrb[8];
     
@@ -53,6 +55,33 @@ public class Woodcutter extends Actor
         applyGravity();
         orbsSetLocation();
         cooldown();
+        keyTouched();
+    }
+    
+    /**
+     * Void for touching key.
+     */
+    public void keyTouched()
+    {
+        // If touched key and door, advance to next level.
+        if (!touchedKey)
+        {   
+            touchedKey = getOneIntersectingObject(Key.class) != null;
+            touchedKey = true;
+        }
+        if (getOneIntersectingObject(Door.class) != null && touchedKey == true)
+        {
+            changeWorld();
+        }
+    }
+    
+    /**
+     * When called, change world to you win!
+     */
+    public void changeWorld()
+    {
+        Greenfoot.delay(10);
+        Greenfoot.setWorld(new Win());
     }
     
     /**
