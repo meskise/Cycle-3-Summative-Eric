@@ -8,18 +8,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ProtectiveOrb extends Actor
 {
-    int counter = 0;
     int frameCounter = 0;
-
     int cooldown = 0;
 
-    
     double deltaX;
     double deltaY;
     boolean isFacingRight;
     
     public ProtectiveOrb()
     {
+        // Load image and resize it.
         GreenfootImage image = getImage();
         image.scale(15, 15);
         setImage(image);
@@ -30,27 +28,32 @@ public class ProtectiveOrb extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
-    {   
-       //System.out.println(counter);
+    {  
+       // Run cooldown.
+       cooldown++;
+       
+       if (isTouching(Enemy.class))
+       {
+            // Run frame counter.
+            frameCounter++;
+            
+            if (frameCounter == 3)
+            {
+                // Remove protective orb after hitting enemy.
+                getWorld().removeObject(this);
+            }
+       }
+       
+       // Protective orbs last 100 frames.
+       if (cooldown == 100)
+       {
+           getWorld().removeObject(this);
+       }
+    
        // If Shift and C are pressed, remove all protective orbs.
        if (Greenfoot.isKeyDown("shift") && Greenfoot.isKeyDown("c"))
        {
            getWorld().removeObject(this);
        }
-
-       
-       if (isTouching(Enemy.class))
-       {
-
-            frameCounter++;
-            
-            if (frameCounter == 3)
-            {
-                // Remove axe after hitting enemy.
-                getWorld().removeObject(this);
-            }
-       
-            counter++;
-      }
-    
+    }
 }
